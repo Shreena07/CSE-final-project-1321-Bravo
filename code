@@ -1,0 +1,149 @@
+import java.util.Scanner;
+
+public class Main
+{
+
+    public static void main(String[] args)
+    {
+        Scanner scan = new Scanner(System.in);
+        String myFile; // File name with Path
+        String myFileName; // File name
+        String myFileType; // File Type (Say ABR")
+        String myFilePath="";  // Location where file is saved
+        String saveFileName= ""; // File name
+        String saveFile; // File name with Path
+        String saveFilePath=""; // File name with Path
+        String saveFileType=""; // File type of file being saved
+        int temp=0;
+        int intFN = 0;  // Index # where Filename Start
+        int intFT = 0;  // Index # where FileType
+        int filenameLength; // Lenth of File name along with Path
+        myFile = "Tesfile\filetype\testing.ABR";
+
+        // Program for File Load
+        do {
+            myFile = getFileName();  // Calling Method to get file name with the path e.g. "C:\Documents\Test.ABR"
+            filenameLength = myFile.length();
+            for (int i = (filenameLength - 1); i >= 0; i--) {
+                temp = (int) myFile.charAt(i);
+                if (temp == 92)// 92 is ASCII value of
+                {
+                    intFN = i + 1;
+                    //File name starts after this value
+                }
+                if (temp == 46)   //46 is asi of .
+                {
+                    intFT = i + 1;
+                    //File Type starts after this value
+                }
+
+            }
+            myFileName = myFile.substring(intFN, (filenameLength));
+            myFileType = myFile.substring(intFT, (filenameLength));
+            // System.out.println(myFileType); 
+            // Check if file type is ".GMP" file type
+            if ((myFileType.equals("ABR"))) {
+                break;
+            } else {
+                System.out.println("You have selected wrong file type \n Please select Correct File type");
+            }
+        } while (!(myFileType.equals("ABR")));
+        System.out.println(" File load done");
+        //----------------------------------------------------------------------  
+        //  Program for File Save
+      System.out.println(" File Save Program Starts now ");
+        
+            System.out.print("Enter the location where you want to save the file \n e.g. C:\\Documents: ");
+            saveFilePath = scan.nextLine();
+            System.out.print("Enter the Filename with the Extension \n e.g. test.ABR : ");
+            saveFileName = scan.nextLine();
+            saveFile= saveFilePath+ "\\" + saveFileName;
+            //System.out.println(saveFile);
+            SaveFile(saveFile); // Calling Mathod to get file name
+            // Now File is saved. so readfile from same location whre you saved.
+            System.out.println("Idealy the program would do the file read function dirctly and no User intervention is required. As this is a higher level programming effort, we have replaced it with Manual Entry to simulate similar Situation. ");
+            myFile = getFileName();
+            if (!(saveFile.equals(myFile))) // Troublshooting code
+                {
+                    //Extracting Filename & File Type of File recoved from readfile
+                    filenameLength = myFile.length();
+                    for (int i = (filenameLength - 1); i >= 0; i--)
+                    {
+                        temp = (int) myFile.charAt(i);
+                        if (temp == 92)// 92 is ASCII value of
+                        {
+                            intFN = i + 1;
+                            //File name starts after this value
+                        }
+                        if (temp == 46)   //46 is asi of .
+                        {
+                            intFT = i + 1;
+                            //File Type starts after this value
+                        }
+
+                    }
+                    myFileName = myFile.substring(intFN, (filenameLength));
+                    myFileType = myFile.substring(intFT, (filenameLength));
+                    //Extracting Filename & File Type of File that we are trying to Save.
+                    filenameLength = saveFile.length();
+                    for (int i = (filenameLength - 1); i >= 0; i--)
+                    {
+                        temp = (int) saveFile.charAt(i);
+                        if (temp == 92)// 92 is ASCII value of
+                        {
+                            intFN = i + 1;
+                            break;
+                            //File name starts after this value
+                        }
+                        if (temp == 46)   //46 is asi of .
+                        {
+                            intFT = i + 1;
+                            //File Type starts after this value
+                        }
+
+                    }
+                    saveFileName = saveFile.substring(intFN, (filenameLength));
+                    saveFileType = saveFile.substring(intFT, (filenameLength));
+                    // Following lines of code gives the user information about what is incorrect: A) Path B) Filename or C) File Type
+                    if (!saveFileName.equals(myFileName))
+                    {
+                        System.out.println("You tried to save File with Name " + saveFileName + ""+ "\n but it saved with " + myFileName );
+                    }
+                    if (!saveFileType.equals(myFileType))
+                    {
+                        System.out.println("You tried to save File with Type " + saveFileType + ""+ "\n but it saved with " + myFileType );
+                    }
+                    if (saveFileName.equals(myFileName) && saveFileType.equals(myFileType))
+                    {
+                        System.out.println("File was not saved at right Location (Path)");
+                    }
+
+                }
+             else {
+               System.out.println("File saved correctly)");
+             }
+
+
+           
+
+
+    }
+  // Mothod get file name 
+    public static String getFileName()
+        {
+            // Actual Code is way complex.  we just made some temp code to simulate the condition
+            Scanner scan = new Scanner(System.in);
+            String myFile="";
+            System.out.print("Enter file Name with Path that you want to read \n e.g. C:\\Documents\\test.ABR  : ");
+            myFile = scan.nextLine();
+            return myFile;
+        }
+
+    public static void SaveFile(String myFile)
+    {
+      // Actual Code is way complex.
+      // we just made some placeholder to simulate the condition
+
+    }
+}
+
